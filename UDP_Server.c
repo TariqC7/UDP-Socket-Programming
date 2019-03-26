@@ -23,3 +23,15 @@
         perror(message);
         exit(1);
     }
+    int main()
+    {
+      fd_set original_socket;
+      fd_set original_stdin;
+      fd_set readfds;
+      fd_set writefds;
+      struct timeval tv;
+      int numfd;
+      int socket_fd, bytes_read;
+      unsigned int address_length;
+      char recieve_data[MAX_LENGTH],send_data[MAX_LENGTH];
+      
