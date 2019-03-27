@@ -60,6 +60,17 @@
       tv.tv_sec = 10;
       tv.tv_usec = 500000;
       server_address.sin_family = AF_INET;
+      server_address.sin_port = htons(5000);
+      server_address.sin_addr.s_addr = INADDR_ANY;
+      bzero(&(server_address.sin_zero),8);
+      if (bind(socket_fd,(struct sockaddr *)&server_address, sizeof(struct sockaddr)) == -1)
+      {
+          error("bind()");
+      }
+      address_length = sizeof(struct sockaddr);
+      printf("\nUDP_Server Waiting for client to respond...\n");
+      fflush(stdout);
+      
       
       
       
