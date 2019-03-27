@@ -96,4 +96,14 @@ int main()
       else if (FD_ISSET(0/*socket_fd*/, &writefds)) //if set to write
       //else
       {
+          FD_CLR(0, &writefds);
+        printf("ClIENT: ");
+        fgets (send_data, MAX_LENGTH, stdin);
+        if ((strlen(send_data)>0) && (send_data[strlen (send_data) - 1] == '\n')) //remove trailing newline, if exists
+        { 
+           send_data[strlen (send_data) - 1] = '\0';
+        }
+        if ((strcmp(send_data , "q") == 0) || strcmp(send_data , "Q") == 0) //if user quits, then send an invisible message to server to quit also
+        { 
+          sendto(socket_fd, send_data, strlen(send_data), 0, (struct sockaddr *)&server_address, sizeof(struct sockaddr));
   
