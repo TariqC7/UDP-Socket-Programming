@@ -46,5 +46,20 @@
       // clear the set ahead of time
       FD_ZERO(&original_socket);
       FD_ZERO(&original_stdin);
+       FD_ZERO(&readfds);
+      FD_ZERO(&writefds);
+      // adding descriptors to the set (0 - stands for STDIN)
+      FD_SET(socket_fd, &original_socket);//instead of 0 put socket_fd
+      FD_SET(socket_fd, &readfds);
+      FD_SET(0,&original_stdin);
+      FD_SET(0, &writefds);
+      // since we got s2 second, it's the "greater", so we use that for
+      // the n param in select()
+      numfd = socket_fd + 1;
+      // wait until either socket has data ready to be recv()d (timeout 10.5 secs)
+      tv.tv_sec = 10;
+      tv.tv_usec = 500000;
+      server_address.sin_family = AF_INET;
+      
       
       
