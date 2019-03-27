@@ -74,4 +74,15 @@ int main()
       perror("select"); // error occurred in select()
     } 
     else if (recieve == 0) 
+    {
+      printf("Timeout occurred!  No data after 10.5 seconds.\n");
+    } 
+    else 
+    {
+      // one or both of the descriptors have data
+      if (FD_ISSET(socket_fd, &readfds)) //if set to read
+      {
+        FD_CLR(socket_fd, &readfds);//clear the set
+        bytes_recieved = recvfrom(socket_fd,recieve_data, sizeof(recieve_data),0,(struct sockaddr *)&server_address,&address_length);
+        recieve_data[bytes_recieved]= '\0';
   
