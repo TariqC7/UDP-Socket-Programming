@@ -70,6 +70,17 @@
       address_length = sizeof(struct sockaddr);
       printf("\nUDP_Server Waiting for client to respond...\n");
       fflush(stdout);
+      printf("Type (q or Q) at anytime to quit\n");
+      while (1)
+      {
+        readfds = original_socket;
+        writefds = original_stdin;//problem
+        int recieve = select(numfd, &readfds, &writefds,/*NULL,*/ NULL, &tv);
+        if (recieve == -1) 
+        {
+          perror("select"); // error occurred in select()
+        } 
+       
       
       
       
