@@ -108,6 +108,16 @@
               {
                 send_data[strlen (send_data) - 1] = '\0';
               }
+              if ((strcmp(send_data , "q") == 0) || (strcmp(send_data , "Q") == 0)) { //if user enters q, then quit
+                sendto(socket_fd,send_data,strlen(send_data),0,(struct sockaddr *)&client_address, sizeof(struct sockaddr));
+                break;
+              }
+              sendto(socket_fd,send_data,strlen(send_data),0,(struct sockaddr *)&client_address, sizeof(struct sockaddr));
+              fflush(stdout);
+            }
+            else printf("\nOOF! What happened?");
+        } //end else
+      }//end while
             
        
       
