@@ -13,3 +13,9 @@
 #include <sys/fcntl.h> // for non-blocking
 #define MAX_LENGTH 1024
 #define HOST "localhost" //127.0.0.1
+
+void error(char *message)
+{
+    perror(message);
+    exit(1);
+}
