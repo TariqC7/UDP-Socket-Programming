@@ -100,6 +100,15 @@
             }
             else if (FD_ISSET(/*socket_fd*/0, &writefds)) //if set to write
             //else
+            {
+              FD_CLR(0, &writefds);
+              printf("SERVER: ");
+              fgets (send_data, MAX_LENGTH, stdin); //input the name with a size limit of MAX_LENGTH
+              if ((strlen(send_data)>0) && (send_data[strlen (send_data) - 1] == '\n')) //if there is a trailing \n, remove it
+              {
+                send_data[strlen (send_data) - 1] = '\0';
+              }
+            
        
       
       
