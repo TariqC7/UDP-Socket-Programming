@@ -80,6 +80,18 @@
         {
           perror("select"); // error occurred in select()
         } 
+        else if (recieve == 0) 
+        {
+          printf("Timeout occurred!  No data after 10.5 seconds.\n");
+        } 
+        else 
+        {
+            // one or both of the descriptors have data
+            if (FD_ISSET(socket_fd, &readfds)) //if set to read
+            { 
+              FD_CLR(socket_fd, &readfds);
+              bytes_read = recvfrom(socket_fd,recieve_data,MAX_LENGTH,0,(struct sockaddr *)&client_address, &address_length); //block call, will wait till client enters something before proceeding
+        
        
       
       
