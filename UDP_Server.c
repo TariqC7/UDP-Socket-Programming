@@ -91,7 +91,15 @@
             { 
               FD_CLR(socket_fd, &readfds);
               bytes_read = recvfrom(socket_fd,recieve_data,MAX_LENGTH,0,(struct sockaddr *)&client_address, &address_length); //block call, will wait till client enters something before proceeding
-        
+              recieve_data[bytes_read] = '\0'; //add null to the end of the buffer
+              if((strcmp(recieve_data , "q") == 0) || (strcmp(recieve_data , "Q") == 0)) { //if client quit, then quit also
+                printf("\nClient has exited the chat.\n");
+                break;
+              }
+              printf("\n(%s , %d) said: %s\n",inet_ntoa(client_address.sin_addr),ntohs(client_address.sin_port),recieve_data);
+            }
+            else if (FD_ISSET(/*socket_fd*/0, &writefds)) //if set to write
+            //else
        
       
       
