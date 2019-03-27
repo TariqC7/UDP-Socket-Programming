@@ -30,3 +30,7 @@ int main()
   int numfd;
   int socket_fd,bytes_recieved;
   unsigned int address_length;
+  struct sockaddr_in server_address;
+  struct hostent *host;
+  char send_data[MAX_LENGTH],recieve_data[MAX_LENGTH];
+  host = (struct hostent *) gethostbyname((char *)HOST);//127.0.0.1
