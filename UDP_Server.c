@@ -34,4 +34,17 @@
       int socket_fd, bytes_read;
       unsigned int address_length;
       char recieve_data[MAX_LENGTH],send_data[MAX_LENGTH];
+      struct sockaddr_in server_address , client_address;
+      if ((socket_fd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) 
+      {
+          error("socket()");
+      }
+      int flags = fcntl(socket_fd, F_GETFL);
+      flags |= O_NONBLOCK;
+      fcntl(socket_fd, F_SETFL, flags);
+      //fcntl(socket_fd, F_SETFL, O_NONBLOCK); //set socket to non-blocking
+      // clear the set ahead of time
+      FD_ZERO(&original_socket);
+      FD_ZERO(&original_stdin);
+      
       
