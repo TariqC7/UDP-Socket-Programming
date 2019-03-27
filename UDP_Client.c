@@ -38,4 +38,17 @@ int main()
   {
     error("socket()");
   }
+  int flags = fcntl(socket_fd, F_GETFL);
+  flags |= O_NONBLOCK;
+  fcntl(socket_fd, F_SETFL, flags);
+  //fcntl(socket_fd, F_SETFL, O_NONBLOCK); //set socket to non-blocking
+  // clear the set ahead of time
+  FD_ZERO(&original_socket);
+  FD_ZERO(&original_stdin);
+  FD_ZERO(&readfds);
+  FD_ZERO(&writefds);
+  // adding descriptors to the set (0 - stands for STDIN)
+  FD_SET(socket_fd, &original_socket);//instead of 0 put socket_fd
+  FD_SET(socket_fd, &readfds);
+  FD_SET(0,&original_stdin);
   
