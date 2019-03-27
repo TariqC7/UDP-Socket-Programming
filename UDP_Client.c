@@ -106,4 +106,14 @@ int main()
         if ((strcmp(send_data , "q") == 0) || strcmp(send_data , "Q") == 0) //if user quits, then send an invisible message to server to quit also
         { 
           sendto(socket_fd, send_data, strlen(send_data), 0, (struct sockaddr *)&server_address, sizeof(struct sockaddr));
+          break;
+        }
+        else 
+        {
+          sendto(socket_fd, send_data, strlen(send_data), 0, (struct sockaddr *)&server_address, sizeof(struct sockaddr));
+        }
+      }
+       else printf("\nOOF! What happened? CLIENT");
+    } //end else
+  } // end while
   
