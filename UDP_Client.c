@@ -85,4 +85,15 @@ int main()
         FD_CLR(socket_fd, &readfds);//clear the set
         bytes_recieved = recvfrom(socket_fd,recieve_data, sizeof(recieve_data),0,(struct sockaddr *)&server_address,&address_length);
         recieve_data[bytes_recieved]= '\0';
+        if((strcmp(recieve_data , "q") == 0) || (strcmp(recieve_data , "Q") == 0)) //if client quit, then quit also
+        { 
+          printf("\nServer has exited the chat.\n");
+          break;
+        }
+        printf("\n(%s , %d) said: %s\n",inet_ntoa(server_address.sin_addr),ntohs(server_address.sin_port),recieve_data);
+        //inet_ntoa returns an ip address ipv4 style, ex: 127.0.0.1, and ntohs returns the port in the converted byte ordering
+      }
+      else if (FD_ISSET(0/*socket_fd*/, &writefds)) //if set to write
+      //else
+      {
   
