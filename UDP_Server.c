@@ -118,7 +118,9 @@
             else printf("\nOOF! What happened?");
         } //end else
       }//end while
-            
+      close (socket_fd);
+      return 0;
+    }
        
       
       
