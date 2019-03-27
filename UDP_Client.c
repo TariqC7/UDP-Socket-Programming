@@ -34,3 +34,8 @@ int main()
   struct hostent *host;
   char send_data[MAX_LENGTH],recieve_data[MAX_LENGTH];
   host = (struct hostent *) gethostbyname((char *)HOST);//127.0.0.1
+  if ((socket_fd = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
+  {
+    error("socket()");
+  }
+  
