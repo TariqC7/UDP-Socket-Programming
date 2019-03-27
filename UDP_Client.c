@@ -64,4 +64,14 @@ int main()
   bzero(&(server_address.sin_zero),8);
   address_length = sizeof(struct sockaddr);
   printf("Type (q or Q) at anytime to quit\n");
+  while (1)
+  {
+    readfds = original_socket;
+    writefds = original_stdin;//problem
+    int recieve = select(numfd, &readfds, /*NULL*/&writefds, NULL, &tv);
+    if (recieve == -1) 
+    {
+      perror("select"); // error occurred in select()
+    } 
+    else if (recieve == 0) 
   
