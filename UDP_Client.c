@@ -116,4 +116,5 @@ int main()
        else printf("\nOOF! What happened? CLIENT");
     } //end else
   } // end while
-  
+  close (socket_fd);
+}
